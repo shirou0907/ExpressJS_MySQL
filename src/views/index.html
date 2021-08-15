@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manh Dung</title>
+    <style>
+    .cc {
+    font-size: 24px;
+    margin: 10px;
+    }
+    .ccc {
+        padding: 10px;
+    }
+    .mdinfo {
+        display: none;
+        font-size: 10px;   
+    }
+    </style>
+</head>
+<body>
+    <div class="cc">JS can control form</div>
+    <div class="ccc">Input your number (1 to 10) :</div>
+    <input type="text" class="md" placeholder="manh dung">
+    <button class="btn">Submit</button>
+    <div class="mdinfo"></div>
+    <script>
+        let mdc = document.querySelector('.md')
+        let mdinfo = document.querySelector('.mdinfo')
+        let btn = document.querySelector('.btn')
+        mdc.onblur = function(e){
+        this.placeholder = 'Dien vao dmm';
+            if(isNaN(this.value)) {
+                mdinfo.innerHTML = 'dien so dmm'
+                mdinfo.style.display = 'block'
+                mdinfo.style.color = 'red'
+            }
+            else {
+                if((this.value <1 || this.value >10)) {
+                    mdinfo.style.display = 'block'
+                    mdinfo.innerHTML = 'Sai cu roi'
+                    mdinfo.style.color = 'red'
+                }
+                else {
+                    mdinfo.style.display = 'block'
+                    mdinfo.innerHTML = 'ok'
+                    mdinfo.style.color = 'green'        
+                    }
+                }     
+            }
+        btn.onclick = function(e) {
+            if(mdinfo.outerText != 'ok') {
+                alert('Da dung buoi dau')
+            }
+            else{
+                alert('ok')
+                location.reload();
+            }
+        }
+    </script>
+
+</body>
+</html>
