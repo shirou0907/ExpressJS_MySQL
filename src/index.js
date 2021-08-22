@@ -1,19 +1,27 @@
-const express = require('express')
-const app = express()
-const port = 2000
-const con = require('./app/config/db')
+var express = require('express');
+var handlebars = require('express-handlebars');
+const path = require('path');
+var router = require('./router/app');
+var cookieParser = require('cookie-parser')
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname+'/app/views/index.html')
-})
+var port = 2000;
+var app = express();
 
-app.get('/public', function (req, res) {
-  var sql = "SELECT * FROM Hanghoa";
-  con.query(sql, function(err, results) {
-    if (err) throw err;
-    res.send(results);
-  });
-});
+app.use(express.urlencoded({
+  extended: true
+}));
+
+app.use(cookieParser())
+
+app.use(express.json());
+
+//Temlate engine
+app.engine('.hbs', handlebars({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'views'));
+
+//use app.use()
+router(app);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
