@@ -1,11 +1,10 @@
-var authRouter = require('./login')
 var authMiddleware = require('../app/middleware/auth.middleware')
+var authRouter = require('./login')
+var homeRouter = require('./home')
 
 function router(app) {
     app.use('/login', authRouter)
-    app.use('/', authMiddleware.requiredAuth, function(req, res) {
-        res.render('index')
-    })
+    app.use('/', authMiddleware.requiredAuth, homeRouter)
 }
 
 module.exports = router;

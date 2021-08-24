@@ -11,7 +11,7 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.use(cookieParser())
+app.use(cookieParser('tung244'))
 
 app.use(express.json());
 
