@@ -1,0 +1,43 @@
+<div class="mt-4">
+  <h1>Quan ly nguoi dung</h1>
+  <button type="button" class="btn btn-success float-end" >
+  + Add
+  </button>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Position</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Account</th>
+        <th scope="col">Password</th>
+        <th scope="col">Create at</th>
+        <th scope="col">Update at</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}} 
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.full_name}}</td>
+        <td>{{this.position}}</td>
+        <td>{{this.phone_number}}</td>
+        <td>{{this.account}}</td>
+        <td>{{this.password}}</td>
+        <td>{{this.create_at}}</td>
+        <td>{{this.update_at}}</td>
+        <td>
+          <a href="/admin/users/{{this.name}}"><button type="button" class="btn btn-secondary">Update</button></a>
+        </td>
+        <td>
+          <button type="button" class="btn btn-secondary">Delete</button></td>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

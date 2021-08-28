@@ -1,4 +1,4 @@
-var account = require('../model/account')
+var user = require('../model/user')
 
 //[GET] login
 module.exports.login = function(req, res) {
@@ -8,18 +8,24 @@ module.exports.login = function(req, res) {
 
 //[POST] login
 module.exports.loginPost = function(req, res) {
-    account.getAccountByID(req.body.account, function (err, account) {
-        if(account.length == 0) {
-          res.render('auth/login', {error: 'Tai khoan deo ton tai'})
+    user.getUserByID(req.body.account, function (err, data) {
+        if(data.length == 0) {
+          res.render('auth/login', {error: 'Tai khoan khong ton tai'})
           return
         }
         
-        else if(account[0].matkhau != req.body.password) {
+        else if(data[0].password != req.body.password) {
           res.render('auth/login', {error: 'Sai mat khau'})
           return
         }
-    
-        res.cookie('userID', account[0].tentk, {signed: true})
+        
+        else if(data[0].position == "Admin") {
+          res.cookie('userID', 'admin', {signed: true})
+          res.redirect('/admin')
+          return
+        }
+
+        res.cookie('userID', data[0].account, {signed: true})
         res.redirect('/')
       })
 }

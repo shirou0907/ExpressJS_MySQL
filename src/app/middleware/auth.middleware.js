@@ -1,4 +1,4 @@
-var account = require('../model/account')
+var user = require('../model/user')
 
 module.exports.requiredAuth = function(req, res, next) {
     if(!req.signedCookies.userID) {
@@ -6,7 +6,7 @@ module.exports.requiredAuth = function(req, res, next) {
         return 
     }
     
-    account.getAccountByID(req.signedCookies.userID, function(err, user) {        
+    user.getUserByID(req.signedCookies.userID, function(err, user) {        
         if(user.length == 0) {
             res.redirect('/login')
             return 

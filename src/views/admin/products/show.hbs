@@ -1,0 +1,39 @@
+<div class="mt-4">
+  <h1>Quan ly hang hoa</h1>
+  <button type="button" class="btn btn-success float-end" >
+  + Add
+  </button>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Create at</th>
+        <th scope="col">Update at</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}} 
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.brand}}</td>
+        <td>{{this.amount}}</td>
+        <td>{{this.create_at}}</td>
+        <td>{{this.update_at}}</td>
+        <td>
+          <a href="/admin/products/{{this.name}}"><button type="button" class="btn btn-secondary">Update</button></a>
+        </td>
+        <td>
+          <button type="button" class="btn btn-secondary">Delete</button></td>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
