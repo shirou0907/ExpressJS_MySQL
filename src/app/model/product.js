@@ -6,15 +6,19 @@ var product = {
     },
 
     getProductByID: function(id, callback) {
-        return db.query("select * from products where id = ?", [id], callback);
-    },
-
-    getProductByName: function(name, callback) {
-        return db.query("select * from products where name = ?", [name], callback);
+        return db.query("select * from products where id = ?", id, callback);
     },
 
     addProduct: function(data, callback) {
-        return db.query("insert into products (name, img_url, brand, description, price, amount, status) values ?", [data], callback);
+        return db.query("insert into products set ?", data, callback);
+    },
+
+    updateProduct: function(id, data, callback) {
+        return db.query("update products set name=?, img_url=?, brand=?, description=?, price=?, amount=?, status=? where id=? ", [data.name, data.img_url, data.brand, data.description, data.price, data.amount, data.status, id], callback);
+    },
+
+    deleteProduct: function(id, callback) {
+        return db.query("delete from products where id=?", id, callback);
     }
 
 }

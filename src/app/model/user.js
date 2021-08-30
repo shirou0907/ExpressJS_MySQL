@@ -6,8 +6,12 @@ var user = {
     },
 
     getUserByID: function(id, callback) {
-        return db.query("select * from users where account = ?", [id], callback);
+        return db.query("select * from users where account = ?", id, callback);
     },
+
+    addUser: function(data, callback) {
+        return db.query("insert into users set ?", data, callback);
+    }
 
 }
 

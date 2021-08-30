@@ -2,7 +2,8 @@ var express = require('express');
 var handlebars = require('express-handlebars');
 const path = require('path');
 var router = require('./router/app');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 
 var port = 2000;
 var app = express();
@@ -10,6 +11,8 @@ var app = express();
 app.use(express.urlencoded({
   extended: true
 }));
+
+app.use(methodOverride('_method'))
 
 app.use(cookieParser('tung244'))
 

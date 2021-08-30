@@ -1,31 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" >
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm p-3 mb-5 bg-white rounded" style="position: fixed; top: 0; left: 0; right: 0; z-index:10">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Navbar</a>
+    <a class="navbar-brand" href="/">
+      <img src="/img/apple.png" alt="" style="width: 40px;">
+    </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" aria-current="page" href="/">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin">Admin</a>
+          <a class="nav-link" href="/admin">ADMIN</a>
         </li>    
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">CONTACT</a>
+        </li>
+        <li class="nav-item" style="margin-left: 8px;">
+          <form class="d-flex" method="GET" action="/">
+          <input name = "search" class="form-control me-2" type="search" placeholder="Tìm kiếm... " style="border-radius: 20px; min-width: 300px;">
+        </form>
         </li>
       </ul>
+      
       {{#unless admin}}
       {{#if user}}
+      <div class="navbar-cart">
+        <a href="#" style="display: block; padding: 10px 20px; font-size: 24px; color: #666; text-decoration: none; position: relative;">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="cart-item" style="padding:0 6px;position: absolute; top: 8px; right: 4px; font-size: 12px; border: 1px solid; border-radius: 10px;">
+            <span>{{user.id}}</span>
+          </div>
+        </a>
+      </div>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 12px">
-            <img src="https://cdn.iconscout.com/icon/free/png-512/node-js-1174925.png" alt="" style="width:32px; height:32px" >
+            <img src="{{user.img_url}}" alt="" style="width:32px; height:32px; border-radius: 50%" >
             {{user.full_name}}
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -20px" >
+            <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+            <li><a class="dropdown-item" href="#">Giao dịch</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/login">LogOut</a></li>
+            <li><a class="dropdown-item" href="/login">Đăng xuất</a></li>
           </ul>
         </li>
       </ul>

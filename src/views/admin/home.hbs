@@ -1,18 +1,20 @@
-<div class="">
-    <p>Test admin</p>
-    {{user.chucvu}}
-
-    <div class="">
-        <a href="/admin/products">Quan ly san pham</a>
-    </div>
-    <div class="">
-        <a href="/admin/users">Quan ly nguoi dung</a>
-    </div>
-    <div class="">
-        <a href="/admin/products">Quan ly san pham</a>
-    </div>
-    <div class="">
-        <a href="/admin/products">Quan ly san pham</a>
+<div class="manager">
+    <p class="fw-bold">Xin chào, {{user.full_name}}</p>
+    <p>Bạn đang đăng nhập với quyền quản lý</p>
+    
+    <div class="mt-5">
+        <div class="alert alert-primary" role="alert">
+            <a class="btn" href="/admin/products" style="color: #333; font-size: 26px">Quản lý sản phẩm</a>
+        </div>
+        <div class="alert alert-primary" role="alert">
+            <a class="btn" href="/admin/users" style="color: #333; font-size: 26px">Quản lý người dùng</a>
+        </div>
+        <div class="alert alert-primary" role="alert">
+            <a class="btn" href="/admin/products" style="color: #333; font-size: 26px">Quản lý hóa đơn</a>
+        </div>
+        <div class="alert alert-primary" role="alert">
+            <a class="btn" href="/admin/products" style="color: #333; font-size: 26px">Thống kê</a>
+        </div>
     </div>
 
 </div>
