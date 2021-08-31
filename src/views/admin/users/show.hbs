@@ -1,10 +1,7 @@
 <div class="mt-4">
-  <h1>Quan ly nguoi dung</h1>
-  <button type="button" class="btn btn-success float-end" >
-  + Add
-  </button>
+  <h1>Quản lý người dùng</h1>
 
-  <table class="table">
+  <table class="table mt-5">
     <thead>
       <tr>
         <th scope="col">#ID</th>
@@ -31,13 +28,51 @@
         <td>{{this.create_at}}</td>
         <td>{{this.update_at}}</td>
         <td>
-          <a href="/admin/users/{{this.name}}"><button type="button" class="btn btn-secondary">Update</button></a>
+          <a href="/admin/users/{{this.id}}"><button type="button" class="btn btn-secondary">Update</button></a>
         </td>
         <td>
-          <button type="button" class="btn btn-secondary">Delete</button></td>
+          <a type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{this.id}}">Delete</a></td>
         </td>
       </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
+
+<form name="delete-form" method="POST"></form>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cảnh báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn xóa dữ liệu ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id='btn-delete' type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var exampleModal = document.getElementById('exampleModal')    
+  var btnDelete = document.getElementById('btn-delete')
+  var deleteForm = document.forms['delete-form']
+
+  exampleModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    console.log(button)
+    var userID = button.getAttribute('data-id')
+    btnDelete.onclick = function() {
+      deleteForm.action = '/admin/users/' + userID + '?_method=DELETE'
+      deleteForm.submit();
+    }
+  })
+  
+</script>

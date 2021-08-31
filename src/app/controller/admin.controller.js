@@ -7,6 +7,10 @@ module.exports.admin = function(req, res) {
 
 module.exports.showProducts = function(req, res) {
     product.getAllProduct(function(err, products) {
+        products.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+            e.update_at = e.update_at.toLocaleString();
+        })
         res.render('admin/products/show', {products: products})
     })
 }
@@ -17,7 +21,11 @@ module.exports.getProduct = function(req, res) {
     })
 }
 
-module.exports.postProduct = function(req, res) {
+module.exports.createProduct = function(req, res) {
+    res.render('admin/products/create')
+}
+
+module.exports.postProduct = function(req, res, next) {
     var choose = req.body.status
     if(choose == 1) {
         req.body.status = 'Có hàng'
@@ -28,13 +36,13 @@ module.exports.postProduct = function(req, res) {
     else {
         req.body.status = 'Liên hệ'
     }
-    product.addProduct(req.body, function(err,data) {
+    product.addProduct(req.body, function(err,data) { 
+        if(err) {
+            res.send(err)
+        }
+        else
         res.redirect('/admin/products')
     })
-}
-
-module.exports.createProduct = function(req, res) {
-    res.render('admin/products/create')
 }
 
 module.exports.updateProduct = function(req, res) {
@@ -51,6 +59,36 @@ module.exports.deleteProduct = function(req, res) {
 
 module.exports.showUsers = function(req, res) {
     user.getAllUser(function(err, data) {
+        data.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+            e.update_at = e.update_at.toLocaleString();
+        })
         res.render('admin/users/show' , {users: data});
+    })
+}
+
+module.exports.createUser = function(req, res) {
+    user.getUserByID(req.params.id, function(err, data) {
+        var dat = data[0].date_of_birth.toLocaleDateString();
+        var yourdate = dat.split("/").reverse();
+        var tmp = yourdate[2];
+        yourdate[2] = yourdate[1];
+        yourdate[1] = tmp;
+        yourdate = yourdate.join("-");
+        data[0].date_of_birth = yourdate;
+
+        res.render('admin/users/edit', {user: data[0]});
+    })
+}
+
+module.exports.updateUser = function (req, res) {
+    user.updateUser(req.params.id, req.body, function(err, data) {
+        res.redirect('/admin/users')
+    })
+}
+
+module.exports.deleteUser = function(req, res) {
+    user.deleteUser(req.params.id, function(err, data) {
+        res.redirect('/admin/users')
     })
 }

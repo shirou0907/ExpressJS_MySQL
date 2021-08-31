@@ -1,0 +1,70 @@
+<div>
+    <h2>Thông tin chi tiết</h2>
+    <hr>
+    <form method="POST" action="/admin/users/{{user.id}}?_method=PUT" id="Update">
+      <div class="mt-3 h6">
+        <label class="form-label">Account</label>
+        <input name="account" type="text" class="form-control" value="{{user.account}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Password</label>
+        <input name="password" type="text" class="form-control" value="{{user.password}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Full Name</label>
+        <input name="full_name" type="text" class="form-control" value="{{user.full_name}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Image Link</label>
+        <input name="img_url" type="text" class="form-control" value="{{user.img_url}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Date of Birth</label>
+        <input name="date_of_birth" type="text" class="form-control" value="{{user.date_of_birth}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Phone Number</label>
+        <input name="phone_number" type="text" class="form-control" value="{{user.phone_number}}" required>
+      </div>
+      <div class="mt-3 h6">
+        <label class="form-label">Position</label>
+        <input name="position" type="text" class="form-control" value="{{user.position}}" required> 
+      </div>
+    </form>
+</div>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Submit
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Cập nhật dữ liệu ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id='btn-update' type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var myModal = document.getElementById('exampleModal')
+  var btnUpdate = document.getElementById('btn-update')
+  var form = document.forms['Update'];
+  myModal.addEventListener('shown.bs.modal', function () {
+    btnUpdate.onclick = function () {
+      form.submit();
+    }
+  })
+</script>

@@ -6,7 +6,7 @@ module.exports.requiredAuth = function(req, res, next) {
         return 
     }
     
-    user.getUserByID(req.signedCookies.userID, function(err, user) {        
+    user.getUserByAccount(req.signedCookies.userID, function(err, user) {        
         if(user.length == 0) {
             res.redirect('/login')
             return 

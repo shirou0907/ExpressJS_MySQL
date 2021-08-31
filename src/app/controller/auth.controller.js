@@ -10,7 +10,7 @@ module.exports.login = function(req, res) {
 //[POST] login
 module.exports.loginPost = function(req, res) {
     hashPassword = md5(req.body.password);
-    user.getUserByID(req.body.account, function (err, data) {
+    user.getUserByAccount(req.body.account, function (err, data) {
         if(data.length == 0) {
           res.render('auth/login', {error: 'Tài khoản không tồn tại!'})
           return
