@@ -9,6 +9,11 @@ var product = {
         return db.query("select * from products where id = ?", id, callback);
     },
 
+    getProductByBrand: function(brand, callback) {
+        return db.query("select * from products where brand = ?", brand, callback);
+    },
+
+
     addProduct: function(data, callback) {
         return db.query("insert into products set ?", data, callback);
     },
