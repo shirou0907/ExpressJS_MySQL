@@ -1,6 +1,7 @@
 var product = require('../model/product')
 var rate = require('../model/rate')
 
+
 module.exports.home = function(req, res) {
     var page = parseInt(req.query.page) || 1;
     var checkPre =  (page > 1);
@@ -42,6 +43,9 @@ module.exports.search = function(req, res, next) {
     product.getAllProduct(function(err, data) {
         data = data.filter(e => {
             return e.name.toLowerCase().indexOf(k.toLowerCase()) !== -1;
+        })
+        data.map(function(e) {
+            return e.price = Number((e.price).toFixed(1)).toLocaleString()
         })
         res.render('products/show',{product: data})
     })

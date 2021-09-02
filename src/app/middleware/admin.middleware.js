@@ -5,7 +5,9 @@ module.exports.requiredAdmin = function(req, res, next) {
         if(data[0].position != "Admin") {
             res.redirect('/')
         }
-        res.locals.admin = true;
-        next()
+        else {
+            res.locals.admin = true;
+            next()
+        }
     }) 
 }

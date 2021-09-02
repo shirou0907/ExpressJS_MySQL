@@ -2,6 +2,11 @@
     <h2>Đăng ký</h2>
     <hr>
     <form method="POST" action="">
+      {{#if error}}
+      <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      {{/if}}
       <div class="mt-3 h6">
         <label class="form-label">Account</label>
         <input name="account" type="text" class="form-control" value="" required>
@@ -12,7 +17,7 @@
       </div>
       <div class="mt-3 h6">
         <label class="form-label">Full Name</label>
-        <input name="full_name" type="text" class="form-control" value="" required>
+        <input name="full_name" type="text" class="form-control" value="{{full_name}}" required>
       </div>
       <div class="mt-3 h6">
         <label class="form-label">Image Link</label>
@@ -20,11 +25,11 @@
       </div>
       <div class="mt-3 h6">
         <label class="form-label">Date of Birth</label>
-        <input name="date_of_birth" type="date" class="form-control" value="" required>
+        <input name="date_of_birth" type="date" class="form-control" value="{{date_of_birth}}" required>
       </div>
       <div class="mt-3 h6">
         <label class="form-label">Phone Number</label>
-        <input name="phone_number" type="text" class="form-control" value="" required>
+        <input name="phone_number" type="text" class="form-control" value="{{phone_number}}" required>
       </div>
       <div class="mt-3 h6">
         <input name="position" type="text" class="form-control" value="User" style="display:none"> 

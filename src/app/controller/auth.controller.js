@@ -25,7 +25,7 @@ module.exports.loginPost = function(req, res) {
         }
         
         else if(data[0].position == "Admin") {
-          res.cookie('userID', 'admin', {signed: true})
+          res.cookie('userID', 'admin', {expires: new Date(Date.now() + 900000), signed: true})
           res.redirect('/admin')
           return
         }
@@ -41,7 +41,24 @@ module.exports.getSignUp = function(req, res) {
 
 module.exports.postSignUp = function(req, res) {
   req.body.password = md5(req.body.password)
-  user.addUser(req.body, function(err, user) {
-    res.redirect('/login')
-  })
+  user.getAllUser(function(err, data) {
+    var dataAccount = [];
+    data.forEach(function(e) {
+      dataAccount.push(e.account);
+    })
+    if(dataAccount.indexOf(req.body.account) !== -1) {
+      res.render('auth/create', {
+        error: 'Tài khoản đã tồn tại, vui lòng lập tài khoản khác!', 
+        full_name: req.body.full_name, 
+        img_url: req.body.img_url, 
+        date_of_birth: req.body.date_of_birth, 
+        phone_number: req.body.phone_number
+    })
+    }
+    else{
+      user.addUser(req.body, function(err, user) {
+        res.redirect('/login')
+      })
+    }
+  })  
 }
