@@ -25,12 +25,12 @@ module.exports.loginPost = function(req, res) {
         }
         
         else if(data[0].position == "Admin") {
-          res.cookie('userID', 'admin', {expires: new Date(Date.now() + 900000), signed: true})
+          res.cookie('userID', 'admin', {expires: new Date(Date.now() + 8 * 3600000), signed: true})
           res.redirect('/admin')
           return
         }
 
-        res.cookie('userID', data[0].account, {signed: true})
+        res.cookie('userID', data[0].account, {expires: new Date(Date.now() + 8 * 3600000), signed: true})
         res.redirect('/')
       })
 }

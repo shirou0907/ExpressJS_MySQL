@@ -13,7 +13,6 @@ var product = {
         return db.query("select * from products where brand = ?", brand, callback);
     },
 
-
     addProduct: function(data, callback) {
         return db.query("insert into products set ?", data, callback);
     },
@@ -24,7 +23,12 @@ var product = {
 
     deleteProduct: function(id, callback) {
         return db.query("delete from products where id=?", id, callback);
+    },
+
+    ratingProduct: function(id, callback) {
+        db.query(`call checkRate(${id})`, id, callback);
     }
+
 
 }
 

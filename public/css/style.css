@@ -1,3 +1,7 @@
+.product-rate {
+    margin-right: 60px;
+}
+
 .product-card:hover {
     transform: translateY(-4px);   
 }
@@ -47,4 +51,9 @@
     text-decoration: underline;
     font-size: 18px;
     transition: all 0.4s;
+}
+
+.fas.fa-star {
+    color: #eeb000;
+    font-size: 16px;
 }

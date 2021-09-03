@@ -1,5 +1,6 @@
 var product = require('../model/product')
 var rate = require('../model/rate')
+var cart = require('../model/cart')
 
 
 module.exports.home = function(req, res) {
@@ -58,6 +59,11 @@ module.exports.getID = function(req, res, next ) {
         })
         res.locals.rate = result
     })
+
+    product.ratingProduct(req.params.id, function(err, rate) {
+        res.locals.productRate = rate[0][0]
+    })
+
     product.getProductByID(req.params.id, function(err, data) {
         data[0].price = Number((data[0].price).toFixed(1)).toLocaleString()
         res.render('products/detail', {product: data[0]})
@@ -68,4 +74,11 @@ module.exports.postID = function(req, res) {
     rate.addRate(req.body, function(err, data) {
         res.redirect('back')
     })    
+}
+
+
+module.exports.test = function(req, res) {
+    cart.test(10, function(err, data) {
+        res.send(data)
+    })
 }

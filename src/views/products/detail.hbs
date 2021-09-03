@@ -1,3 +1,4 @@
+
 <div class="product-detail d-flex">
     <div class="product-img">
         <img src="{{product/img_url}}" alt="" style="width: 500px">
@@ -6,12 +7,24 @@
         <div class="product-name">
             <h3>{{product.name}}</h3>
         </div>
-        <div class="product-status" style="margin: 20px 0;;max-width: 160px;padding: 6px 10px;background-color: #eb1b1bf2 ;display: block;border-radius: 6px;color: #fff;text-align: center;">
-            <span>{{product.status}}</span>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="product-status" style="margin: 20px 0;;max-width: 160px;padding: 8px 16px;background-color: #eb1b1bf2 ;display: block;border-radius: 6px;color: #fff;text-align: center;">
+                <span>{{product.status}}</span>
+            </div>
+            <div class="product-rate">
+                <span class="fw-bold">Đánh giá sản phẩm: </span>
+                <br>
+                {{#if productRate.avg}}
+                <span>{{productRate.total}} Rating - {{productRate.avg}} <i class="fas fa-star"></i>  </span>
+                {{else}}
+                <span>Chưa có đánh giá!</span>
+                {{/if}}
+            </div>
         </div>
-        <div class="product-brand fw-bold">
-            <p>Thương hiệu: {{product.brand}}</p>
+        <div class="product-brand fw-bold mb-4">
+            <span>Thương hiệu: {{product.brand}}</span>
         </div>
+        
         <div class="product-sell" style="max-width: 240px;padding: 20px 40px;border: 1px solid #ccc;border-radius: 4px;box-shadow: 0 1px 2px #ccc;">
             <div style="color:red">Giá bán : {{product.price}} đ</div>
         </div>
