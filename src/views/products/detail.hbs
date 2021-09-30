@@ -3,7 +3,7 @@
     <div class="product-img">
         <img src="{{product/img_url}}" alt="" style="width: 500px">
     </div>
-    <div class="product-content d-flex flex-column justify-content-between" style="margin-left: 40px;">
+    <div class="product-content d-flex flex-column justify-content-between" style="margin-left: 40px; width: 100%">
         <div class="product-name">
             <h3>{{product.name}}</h3>
         </div>
@@ -36,7 +36,13 @@
         
         <div>Thanh toán Online, giao hàng nhanh 24h</div>
         <div class="product-add mt-2">
-            <a class="btn-add" href="" style="display: block;text-align: center;text-decoration: none; color:#fff; padding: 20px 40px;border-radius: 8px; background-color: #eb1b1bf2; max-width: 300px;">Thêm vào giỏ hàng</a>
+            <form action="/user/cart" method="POST" name="addCart">
+                <input type="hidden" name="user_id" value="{{user.id}}"/>
+                <input type="hidden" name="product_id" value="{{product.id}}"/>
+                <input type="hidden" name="quantity" value="1"/>
+                <a class="btn-add" onclick="addCart.submit()" style="display: block;text-align: center;text-decoration: none; color:#fff; padding: 20px 40px;border-radius: 8px; background-color: #eb1b1bf2; max-width: 300px; cursor: pointer;">Thêm vào giỏ hàng</a>
+            </form>
+            
         </div>
     </div>
 </div>

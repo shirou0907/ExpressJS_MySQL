@@ -26,9 +26,8 @@ var product = {
     },
 
     ratingProduct: function(id, callback) {
-        db.query(`call checkRate(${id})`, id, callback);
+        return db.query(`call checkRate(${id})`, id, callback);
     }
-
 
 }
 

@@ -1,4 +1,5 @@
 var user = require('../model/user');
+var cart = require('../model/cart');
 var md5 = require('md5');
 
 module.exports.info = function(req, res) {
@@ -40,4 +41,22 @@ module.exports.postPwd = function(req, res) {
             })
         }
     }) 
+}
+
+module.exports.getCart = function(req, res) {
+    cart.getCartByUser(res.locals.user.id, function(err, data) {
+        res.send(data[0]);
+    })
+}
+
+module.exports.postCart = function(req, res) {
+    cart.addCart(req.body, function(err, data) {
+        res.redirect('/')
+    })
+}
+
+module.exports.countCart = function(req, res) {
+    cart.countCart(res.locals.user.id, function(err, data) {
+        res.send(data[0]);
+    })
 }

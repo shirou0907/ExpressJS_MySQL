@@ -75,10 +75,3 @@ module.exports.postID = function(req, res) {
         res.redirect('back')
     })    
 }
-
-
-module.exports.test = function(req, res) {
-    cart.test(10, function(err, data) {
-        res.send(data)
-    })
-}

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm p-3 mb-5 bg-white rounded" style="position: fixed; top: 0; left: 0; right: 0; z-index:10">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm p-3 mb-5 rounded" style="position: fixed; top: 0; left: 0; right: 0; z-index:10">
+  <div class="container-fluid  align-items-baseline">
     <a class="navbar-brand" href="/">
       <img src="/img/apple.png" alt="" style="width: 40px;">
     </a>
@@ -24,16 +24,33 @@
       {{#unless admin}}
       {{#if user}}
       <div class="navbar-cart">
-        <a href="#" style="display: block; padding: 10px 20px; font-size: 24px; color: #666; text-decoration: none; position: relative;">
+        <a href="/user/cart" class="cart-link" style="display: block; padding: 10px 20px; font-size: 24px; color: #666; text-decoration: none; position: relative;">
           <i class="fas fa-shopping-cart"></i>
+          {{#if cart}}
           <div class="cart-item" style="padding:0 6px;position: absolute; top: 8px; right: 4px; font-size: 12px; border: 1px solid; border-radius: 10px;">
-            <span>{{user.id}}</span>
+            <span>{{cart.countCart}}</span>
           </div>
+          {{/if}}
+        </a>
+        <a href="/user/cart" class="cart-detail" style="text-decoration:none; color: #333;background-color: #fff; position:absolute;min-width: max-content;text-align:center;right:160px">
+            {{#if cart}}
+            <div class="cart-on" style="padding: 40px">
+              <span>Bạn có {{cart.countCart}} sản phẩm trong giỏ hàng</span>
+              <div class="img-cart--on"></div>
+              <span>Nhấn vào để xem chi tiết!</span>
+            </div>
+            {{else}}
+            <div class="cart-out" style="padding: 40px">
+              <span>Bạn chưa có sản phẩm nào trong giỏ hàng</span>
+              <div class="img-cart--out"></div>
+              <span>Hãy chọn mua ngay!</span>
+            </div>
+            {{/if}}
         </a>
       </div>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 12px">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 12px; width:180px; text-align:center">
             <img src="{{user.img_url}}" alt="" style="width:32px; height:32px; border-radius: 50%;" >
             {{user.full_name}}
           </a>
