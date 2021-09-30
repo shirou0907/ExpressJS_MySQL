@@ -44,8 +44,23 @@ module.exports.postPwd = function(req, res) {
 }
 
 module.exports.getCart = function(req, res) {
+    cart.getBillCart(res.locals.user.id, function(err, data) {
+        if(data[0].length > 0) {
+            res.locals.bill = Number((data[0][0].total ).toFixed(1)).toLocaleString();
+            return
+        }
+    })
+
     cart.getCartByUser(res.locals.user.id, function(err, data) {
-        res.send(data[0]);
+        data[0].map(function(e) {
+            return e.price = Number((e.price).toFixed(1)).toLocaleString()
+        })
+
+        data[0].map(function(e) {
+            return e.cost = Number((e.cost).toFixed(1)).toLocaleString()
+        })
+
+        res.render('cart/show', {data: data[0]})
     })
 }
 
@@ -55,8 +70,14 @@ module.exports.postCart = function(req, res) {
     })
 }
 
-module.exports.countCart = function(req, res) {
-    cart.countCart(res.locals.user.id, function(err, data) {
-        res.send(data[0]);
+module.exports.deleteCart = function(req, res) {
+    cart.deleteCart(req.params.id, function(err, data) {
+        res.redirect('back')
+    })
+}
+
+module.exports.updateCart = function(req, res) {
+    cart.updateCart(req.params.id, req.body, function(err, data) {
+        res.redirect('back')
     })
 }

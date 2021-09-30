@@ -1,0 +1,126 @@
+<h1>Giỏ hàng của bạn</h1>
+<div class="row mt-4">
+    {{#if data}}
+    <div class="col col-lg-8">
+        <div class="d-flex justify-content-between p-2 mt-2 align-items-center"
+            style="text-align: center; font-weight:600">
+            <div class="item-header d-flex" style="width: 50%">
+                Name
+            </div>
+            <div class="item-x">
+                Quantity
+            </div>
+            <div class="item-cost">
+                Cost
+            </div>
+            <div class="item-behavior">
+                Delete
+            </div>
+        </div>
+        <hr>
+        {{#each data}}
+        
+        <div class="cart-item d-flex justify-content-between p-2 mt-2 align-items-center">
+            <div class="item-header d-flex" style="width: 50%">
+                <a href="/products/{{this.product_id}}" style="text-decoration: none; color: #333; display: inline-flex">
+                    <img src="{{this.img_url}}" alt="" width="100px">
+                    <div class="item-info">
+                        <div>{{this.name}}</div>
+                        <div style="font-size: 14px">{{this.price}}</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="item-x" style="text-align: center">
+                <span>{{this.quantity}}</span>
+                <div>
+                    <button class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id={{this.id}}>
+                        <i class="fas fa-edit"  style="font-size: 24px"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="item-cost">
+                <span>{{this.cost}}</span>
+            </div>
+
+            <div class="item-behavior">
+                <form method="post" action="/user/cart/{{this.id}}?_method=DELETE">
+                    <button class="btn btn-delete" type="submit"><i class="fas fa-times" style="font-size: 24px"></i></button>
+                </form>
+            </div>
+        </div>
+   
+        {{/each}}
+    </div>
+    {{else}}
+    <a href="/">
+        <img src="/img/empty.png" alt="" width="100%">
+    </a>
+    {{/if}}
+    {{#if bill}}
+    <div class="col col-lg-4">
+        <div class="bill p-4" style="background-color: lightyellow; border-radius: 8px">
+            <div class="bill-header" style="text-align: right; font-size: 18px; font-weight: 500">
+                Thông tin thanh toán
+            </div>
+            <div class="bill-body" style="min-height: 160px; margin-top: 40px">
+                {{#each data}}
+                <div class="bill-detail d-flex justify-content-between mb-2" style="font-size: 12px;">
+                    <div>{{this.name}}</div>
+                    <div>x{{this.quantity}}</div>
+                </div>
+                {{/each}}
+            </div>
+            <hr>
+            <div class="bill-footer">
+                <p style="text-align:right; font-weight: 500;">{{bill}} VND</p>
+                <a class="btn-buy mt-4" style="display: block;text-align: center;text-decoration: none; color:#fff; padding: 20px 40px;border-radius: 8px; background-color: #eb1b1bf2; cursor: pointer;">Xác nhận thanh toán</a>
+                <p style="font-size: 14px; font-style: italic; margin-top: 20px">** Đơn hàng sẽ được kiểm duyệt và xử lý một cách sớm nhất, vui lòng đợi shop liên hệ! **</p>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Nhập vào số lượng sản phẩm bạn muốn mua: </p>
+                <form method="post" name="update-form">
+                    <input type="number" name="quantity" class="form-control" placeholder="Số lượng > 0" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-update">OK</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var exampleModal = document.getElementById('exampleModal')
+    var btnUpdate = document.getElementById('btn-update')
+    var updateForm = document.forms['update-form']
+
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var cartID = button.getAttribute('data-id')
+        btnUpdate.onclick = function () {
+            updateForm.action = '/user/cart/' + cartID + '?_method=PUT'
+            updateForm.submit();
+        }
+    })
+
+</script>

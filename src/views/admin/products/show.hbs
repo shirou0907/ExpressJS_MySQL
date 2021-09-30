@@ -66,7 +66,6 @@
 
   exampleModal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget
-    console.log(button)
     var productID = button.getAttribute('data-id')
     btnDelete.onclick = function() {
       deleteForm.action = '/admin/products/' + productID + '?_method=DELETE'

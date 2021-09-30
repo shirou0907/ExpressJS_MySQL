@@ -9,5 +9,7 @@ router.post('/change-password', userController.postPwd);
 
 router.get('/cart', userController.getCart);
 router.post('/cart', userController.postCart);
+router.delete('/cart/:id', userController.deleteCart);
+router.put('/cart/:id', userController.updateCart);
   
 module.exports = router;

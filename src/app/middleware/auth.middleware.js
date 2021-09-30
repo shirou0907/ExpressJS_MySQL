@@ -18,6 +18,7 @@ module.exports.requiredAuth = function(req, res, next) {
         cart.countCart(user[0].id, function(err,data) {
             if(data[0].length != 0) {
                 res.locals.cart = data[0][0];
+                return
             }
         })
 

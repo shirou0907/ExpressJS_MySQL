@@ -9,8 +9,8 @@ var cart = {
         db.query('call addCart(?,?,?)', [data.user_id, data.product_id, data.quantity], callback);
     },
 
-    updateCart: function(data, callback) {
-        db.query(`call updateCart(?,?)`, [data.quantity, data.id], callback);
+    updateCart: function(id, data, callback) {
+        db.query(`call updateCart(?,?)`, [id, data.quantity], callback);
     },
 
     deleteCart: function(id, callback) {
@@ -23,6 +23,10 @@ var cart = {
 
     countCart: function(userID, callback) {
         db.query(`call countCart(${userID})`, userID, callback);
+    },
+
+    getBillCart: function(userID, callback) {
+        db.query(`call getTotal(${userID})`, userID, callback);
     }
    
 }
