@@ -1,0 +1,36 @@
+<h1>Hóa đơn đang chờ xác nhận</h1>
+
+{{#if order}}
+<div class="row mt-4">
+    {{#each order}}
+    <div class="col col-lg-6">
+        <div class="mt-4 p-4 d-flex" style="border: 3px solid #f9c729; background-color: #ffc409bf; border-radius: 6px">
+            <div class="flex-fill">
+                <a href="/user/orders/{{this.orderID}}" style="text-decoration: none;color:unset; font-weight: 500">
+                    <p>Mã đơn hàng: {{this.orderID}}</p>
+                    <p>Ngày đặt: {{this.create_at}}</p>
+                    <p>Trạng thái: {{this.status}}</p>
+                    <p>Khách hàng: {{this.full_name}}</p>
+                    <p>Số điện thoại: {{this.phone_number}}</p>
+                    <p>Tổng tiền: {{this.total}}</p>
+                </a>
+            </div>
+            <div class="d-flex flex-column justify-content-between">
+                <form method="POST">
+                    <input type="hidden" name="orderID" value="{{this.orderID}}">
+                    <button type="submit" id="btn-order-accept" class="p-3 text-center"
+                        style="cursor: pointer;width:100%;font-size: 18px; border: 3px solid #fff;border-radius: 8px; background-color: #fff">
+                        Xác <br> nhận <br> <i class="fas fa-clipboard-check" style="font-size: 24px"></i></button>
+                </form>
+
+                <form action="/user/orders/{{this.orderID}}" method="POST">
+                    <button type="submit" id="btn-order-deny" class="p-3 text-center"
+                        style="cursor: pointer;width:100%;font-size: 18px; border: 3px solid #fff;border-radius: 8px; background-color: #fff">
+                        Hủy <br> <i class="fas fa-trash" style="font-size: 24px"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{/if}}

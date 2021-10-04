@@ -1,3 +1,5 @@
+const { model } = require('mongoose')
+const order = require('../model/order')
 var product = require('../model/product')
 var user = require('../model/user')
 
@@ -90,5 +92,35 @@ module.exports.updateUser = function (req, res) {
 module.exports.deleteUser = function(req, res) {
     user.deleteUser(req.params.id, function(err, data) {
         res.redirect('/admin/users')
+    })
+}
+
+module.exports.orderWait = function(req, res) {
+    order.getAllOrderWait(function(err, order) {
+        order[0].map(function(e) {
+            return e.total = Number((e.total).toFixed(1)).toLocaleString()
+        })
+        order[0].map(e => {
+            e.create_at = e.create_at.toLocaleString();
+        })
+        res.render('admin/orders/wait', { order: order[0]})
+    })
+}
+
+module.exports.orderSuccess = function(req, res) {
+    order.getAllOrderSuccess(function(err, order) {
+        order[0].map(function(e) {
+            return e.total = Number((e.total).toFixed(1)).toLocaleString()
+        })
+        order[0].map(e => {
+            e.create_at = e.create_at.toLocaleString();
+        })
+        res.render('admin/orders/success', {order: order[0]})
+    })
+}
+
+module.exports.acceptOrder = function(req, res) {
+    order.acceptOrder(req.body.orderID, function(err, order) {
+        res.redirect('back')
     })
 }

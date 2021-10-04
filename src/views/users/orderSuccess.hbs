@@ -1,0 +1,17 @@
+<h1>Đơn hàng đã mua</h1>
+
+{{#if order}}
+    <div class="row mt-4">
+    {{#each order}}
+        <div class="col col-lg-6">
+            <a href="/user/orders/{{this.id}}" style="text-decoration: none;color:unset; font-weight: 500">
+                <div class="mt-4 p-4" style="border: 3px solid #058d07; background-color: #3cee0fbf; border-radius: 6px">
+                <p>Mã đơn hàng: {{this.id}}</p>
+                <p>Ngày đặt: {{this.create_at}}</p>
+                <p>Trạng thái: {{this.status}}</p>
+            </div>
+            </a>
+        </div>
+    {{/each}}
+    </div>
+{{/if}}

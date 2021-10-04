@@ -1,5 +1,6 @@
 var user = require('../model/user')
 var cart = require('../model/cart')
+var order = require('../model/order')
 
 module.exports.requiredAuth = function(req, res, next) {
     if(!req.signedCookies.userID) {
@@ -19,6 +20,20 @@ module.exports.requiredAuth = function(req, res, next) {
             if(data[0].length != 0) {
                 res.locals.cart = data[0][0];
                 return
+            }
+        })
+
+        order.countOrderWait(user[0].id, function(err,data) {
+            if(data[0].length != 0) {
+                res.locals.wait = data[0][0];
+                return 
+            }
+        })
+
+        order.countOrderSuccess(user[0].id, function(err,data) {
+            if(data[0].length != 0) {
+                res.locals.success = data[0][0];
+                return 
             }
         })
 

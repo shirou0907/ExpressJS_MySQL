@@ -1,6 +1,8 @@
 var user = require('../model/user');
 var cart = require('../model/cart');
+var order = require('../model/order');
 var md5 = require('md5');
+
 
 module.exports.info = function(req, res) {
     user.getUserByAccount(req.signedCookies.userID, function(err, data) {
@@ -79,5 +81,56 @@ module.exports.deleteCart = function(req, res) {
 module.exports.updateCart = function(req, res) {
     cart.updateCart(req.params.id, req.body, function(err, data) {
         res.redirect('back')
+    })
+}
+
+module.exports.getOrderWait = function(req, res) {
+    order.getOrderWaitByUser(res.locals.user.id, function(err, data) {
+        data.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+        })
+        res.render('users/orderWait', {order: data});
+    })
+}
+
+module.exports.getOrderSuccess = function(req, res) {
+    order.getOrderSuccessByUser(res.locals.user.id, function(err, data) {
+        data.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+        })
+        res.render('users/orderSuccess', {order: data});
+    })
+}
+
+module.exports.addOrder = function(req, res, next) {
+    order.addOrder(res.locals.user.id, function(err, data) {
+        var idAdd = data[0][0].idAdd;
+        cart.getCartByUser(res.locals.user.id, function(err, cart) {
+            cart[0].forEach(function(e) {   
+                    order.addOrderItems(idAdd, e, function() {  
+                })
+            })
+        })
+        res.redirect('back')
+    })
+};
+
+module.exports.getOrderItems = function(req, res) {
+    order.getOrderItemsByID(req.params.id, function(err, data) {
+        data.map(function(e) {
+            return e.price = Number((e.price).toFixed(1)).toLocaleString()
+        })
+        data.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+        })
+
+        res.locals.thisOrder = data[0]
+        res.render('users/orderDetail', {order: data})
+    })
+}
+
+module.exports.deleteOrder = function(req, res) {
+    order.deleteOrder(req.params.id, function(err, data) {
+        res.redirect('/')
     })
 }

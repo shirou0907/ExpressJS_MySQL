@@ -1,29 +1,74 @@
-   <div class="products">
-        <div class="row mt-4">
-            <div class="col col-lg-1">
-                <ul class="list" style="list-style: none;padding-left: 0;">
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Apple">Apple</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Asus">Asus</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Huawei">Huawei</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=LG">LG</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Nokia">Nokia</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Oppo">Oppo</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Samsung">Samsung</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Sony">Sony</a></li>
-                    <li class="list-item-brand mt-3 "><a href="/?brand=Xiaomi">Xiaomi</a></li>
-                </ul>
-            </div>
-            <div class="col col-lg-11">
-                {{#if product}}
-                <div class="row">
-                    {{#each product}}
-                    <div class="col col-lg-3 mb-4">
-                        <a class="product-card" href="/products/{{this.id}}" style="display: block; text-decoration: none; ">
-                            <div class="card" style="padding: 10px 20px; border-radius: 10px; overflow: hidden;">
-                            <h5 class="card-title mt-2" style="color: #333; height: 48px; line-height: 24px; text-align: center;">{{this.name}}</h5>
-                            <img src="{{this.img_url}}" class="card-img-top" style="width: 200px; height: 200px; margin: auto;">
+<div class="products">
+    <div class="row mt-4">
+        <div class="col col-lg-1">
+            <ul class="list" style="list-style: none;padding-left: 0;">
+                <li class="list-item-brand">
+                    <a href="/?brand=Apple">
+                        <img src="/img/logo/Apple.svg" width="46px" alt="" style="margin-left: 10px;">
+                    </a>
+                </li>
+               
+                <li class="list-item-brand">
+                    <a href="/?brand=Samsung">
+                        <img src="/img/logo/Samsung.svg" width="62px" alt="">
+                    </a>
+                </li>
+                
+                <li class="list-item-brand">
+                    <a href="/?brand=LG">
+                        <img src="/img/logo/LG.svg" width="60px" alt="">
+                    </a>
+                </li>
+
+                 <li class="list-item-brand">
+                    <a href="/?brand=Huawei">
+                        <img src="/img/logo/Huawei.svg" width="64px" alt="">
+                    </a>
+                </li>
+
+                <li class="list-item-brand">
+                    <a href="/?brand=Asus">
+                        <img src="/img/logo/Asus.svg" width="60px" alt="">
+                    </a>
+                </li>
+                <li class="list-item-brand">
+                    <a href="/?brand=Xiaomi">
+                        <img src="/img/logo/Xiaomi.svg" width="50px" alt="">
+                    </a>
+                </li>
+                <li class="list-item-brand">
+                    <a href="/?brand=Oppo">
+                        <img src="/img/logo/Oppo.svg" width="60px" alt="">
+                    </a>
+                </li>
+                <li class="list-item-brand">
+                    <a href="/?brand=Sony">
+                        <img src="/img/logo/Sony.svg" width="60px" alt="">
+                    </a>
+                </li>
+                <li class="list-item-brand">
+                    <a href="/?brand=Nokia">
+                        <img src="/img/logo/Nokia.svg" width="60px" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col col-lg-11">
+            {{#if product}}
+            <div class="row">
+                {{#each product}}
+                <div class="col col-lg-3 mb-4">
+                    <a class="product-card" href="/products/{{this.id}}"
+                        style="display: block; text-decoration: none; ">
+                        <div class="card" style="padding: 10px 20px; border-radius: 10px; overflow: hidden;">
+                            <h5 class="card-title mt-2"
+                                style="color: #333; height: 60px; line-height: 24px; text-align: center;">{{this.name}}
+                            </h5>
+                            <img src="{{this.img_url}}" class="card-img-top"
+                                style="width: 200px; height: 200px; margin: auto;">
                             <div class="card-body" style="padding: 1rem 0">
-                                <p class="card-text d-flex justify-content-between" style="color: #333;"> {{this.status}}
+                                <p class="card-text d-flex justify-content-between" style="color: #333;">
+                                    {{this.status}}
                                     <span style="color:#eeb000">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -32,23 +77,27 @@
                                         <i class="fas fa-star"></i>
                                     </span>
                                 </p>
-                                <p class="card-text card-price" style="text-align: center; padding:8px; background-color: #f5f5f5; border-radius: 8px;">Giá bán: {{this.price}}</p>
+                                <p class="card-text card-price"
+                                    style="text-align: center; padding:8px; background-color: #f5f5f5; border-radius: 8px;">
+                                    Giá bán: {{this.price}}</p>
                             </div>
-                            </div>
-                        </a>
-                    </div>
-                    {{/each}}
+                        </div>
+                    </a>
                 </div>
-                {{else}}
-                    <h3 style="line-height: 500px; text-align: center">Dữ liệu trống!</h3>
-                {{/if}}
+                {{/each}}
             </div>
+            {{else}}
+            <h3 style="line-height: 500px; text-align: center">Dữ liệu trống!</h3>
+            {{/if}}
         </div>
-        {{#if page}}
-        <nav aria-label="Page navigation example">
+    </div>
+    {{#if page}}
+    <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="/?page=1"><<</a></li>
-            <li class="page-item"><a class="page-link" href="/?page={{this.prePage}}"><</a></li>
+            <li class="page-item"><a class="page-link" href="/?page=1"><<</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/?page={{this.prePage}}"><</a>
+            </li>
             {{#if checkPre}}
             <li class="page-item"><a class="page-link" href="/?page={{this.prePage}}">{{this.prePage}}</a></li>
             {{/if}}
@@ -57,6 +106,6 @@
             <li class="page-item"><a class="page-link" href="/?page={{this.nextPage}}">></a></li>
             <li class="page-item"><a class="page-link" href="/?page={{this.pages}}">>></a></li>
         </ul>
-        </nav>
-        {{/if}}
-   </div>
+    </nav>
+    {{/if}}
+</div>

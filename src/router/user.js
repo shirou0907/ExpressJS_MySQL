@@ -9,7 +9,13 @@ router.post('/change-password', userController.postPwd);
 
 router.get('/cart', userController.getCart);
 router.post('/cart', userController.postCart);
-router.delete('/cart/:id', userController.deleteCart);
 router.put('/cart/:id', userController.updateCart);
+router.delete('/cart/:id', userController.deleteCart);
+
+router.get('/orders-wait', userController.getOrderWait);
+router.get('/orders-success', userController.getOrderSuccess);
+router.get('/orders/:id', userController.getOrderItems);
+router.post('/orders/:id', userController.deleteOrder);
+router.post('/orders', userController.addOrder);
   
 module.exports = router;

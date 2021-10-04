@@ -22,7 +22,7 @@
         
         <div class="cart-item d-flex justify-content-between p-2 mt-2 align-items-center">
             <div class="item-header d-flex" style="width: 50%">
-                <a href="/products/{{this.product_id}}" style="text-decoration: none; color: #333; display: inline-flex">
+                <a class="item-info-link" href="/products/{{this.product_id}}" style="text-decoration: none; color: #333; display: inline-flex">
                     <img src="{{this.img_url}}" alt="" width="100px">
                     <div class="item-info">
                         <div>{{this.name}}</div>
@@ -35,7 +35,7 @@
                 <span>{{this.quantity}}</span>
                 <div>
                     <button class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id={{this.id}}>
-                        <i class="fas fa-edit"  style="font-size: 24px"></i>
+                        <i class="fas fa-sync-alt"  style="font-size: 24px"></i>
                     </button>
                 </div>
             </div>
@@ -60,10 +60,17 @@
     {{/if}}
     {{#if bill}}
     <div class="col col-lg-4">
-        <div class="bill p-4" style="background-color: lightyellow; border-radius: 8px">
-            <div class="bill-header" style="text-align: right; font-size: 18px; font-weight: 500">
+        <div class="bill p-4" style="margin: 0 24px;background-color: lightyellow; border-radius: 8px">
+            <div class="bill-header" style="text-align: right; font-size: 18px; font-weight: 500; padding: 6px; border-bottom: 1px dotted #ccc;">
                 Thông tin thanh toán
             </div>
+
+           <div class="bill-info mt-3" style="font-size: 13px; font-weight:500;text-align: left;padding: 8px 0;border-bottom: 1px dotted #ccc;font-style:italic;">
+                <div>Khách hàng: {{user.full_name}}</div>
+                <div>Phone: {{user.phone_number}}</div>
+                <div class="bill-date"></div>
+           </div>
+            
             <div class="bill-body" style="min-height: 160px; margin-top: 40px">
                 {{#each data}}
                 <div class="bill-detail d-flex justify-content-between mb-2" style="font-size: 12px;">
@@ -77,6 +84,8 @@
                 <p style="text-align:right; font-weight: 500;">{{bill}} VND</p>
                 <a class="btn-buy mt-4" style="display: block;text-align: center;text-decoration: none; color:#fff; padding: 20px 40px;border-radius: 8px; background-color: #eb1b1bf2; cursor: pointer;">Xác nhận thanh toán</a>
                 <p style="font-size: 14px; font-style: italic; margin-top: 20px">** Đơn hàng sẽ được kiểm duyệt và xử lý một cách sớm nhất, vui lòng đợi shop liên hệ! **</p>
+                <form action="/user/orders" method="POST" name="form-buy">
+                </form>
             </div>
         </div>
     </div>
@@ -122,5 +131,20 @@
             updateForm.submit();
         }
     })
+
+    var billdate = document.querySelector('.bill-date');
+    var date = new Date();
+    if(billdate) {
+        billdate.innerHTML = `Date: ${date.toLocaleString()} `
+    }
+
+    var formBuy = document.forms['form-buy'];
+    var btnBuy = document.querySelector('.btn-buy');
+
+    if(btnBuy) {
+        btnBuy.onclick = function() {
+        formBuy.submit();
+    }
+    }
 
 </script>

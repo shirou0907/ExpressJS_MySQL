@@ -1,0 +1,43 @@
+<h1>Chi tiết đơn hàng</h1>
+<hr>
+<div class="fw-bold mt-4" style="font-size: 14px;">
+    <p>Mã hóa đơn: {{thisOrder.orderID}}</p>
+    <p>Ngày đặt: {{thisOrder.create_at}}</p>
+    <p>Khách hàng: {{thisOrder.full_name}}</p>
+    <p>Số điện thoại: {{thisOrder.phone_number}}</p>
+</div>
+<div class="row mt-4">
+    {{#each order}}
+    <div class="col col-lg-6 mt-4">
+       <a href="/products/{{this.productID}}" style="text-decoration: none; color: unset">
+           <div class="p-3 d-flex" style="border: 1px solid #ccc">
+                <div class="">
+                    <img src="{{this.productImg}}" width="200px" height="200px" alt="">
+                </div>
+                <div class="d-flex flex-column justify-content-between">
+                    <p class="fw-bold">{{this.name}}</p>
+                    <p style="font-size: 14px">Đơn giá: {{this.price}}</p>
+                    <p style="font-size: 14px">Số lượng: {{this.quantity}}</p>
+                    <p id="order-status" style="font-size: 14px">Trạng thái: {{this.status}}</p>
+                </div>
+           </div>
+       </a>
+    </div>
+    {{/each}}
+</div>
+<div id="btn-delete-order" class="btn btn-danger mt-4">Hủy đơn hàng</div>
+
+<form action="" method="POST" name="deleteOrder">
+</form>
+
+<script>
+    var btnDelOrder = document.getElementById("btn-delete-order");
+    var orderStatus = document.getElementById("order-status")
+    var formDel = document.forms['deleteOrder'];
+    btnDelOrder.onclick = function() {
+        formDel.submit();
+    }
+    if(orderStatus.outerText == 'Trạng thái: SUCCESS') {
+        btnDelOrder.style.display = 'none';
+    }
+</script>

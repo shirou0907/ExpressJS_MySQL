@@ -15,6 +15,10 @@ router.put('/users/:id', adminController.updateUser)
 router.delete('/users/:id', adminController.deleteUser)
 router.get('/users', adminController.showUsers)
 
+router.get('/orders-wait', adminController.orderWait) 
+router.post('/orders-wait', adminController.acceptOrder)
+router.get('/orders-success', adminController.orderSuccess) 
+
 router.get('/', adminController.admin)
 
 module.exports = router;

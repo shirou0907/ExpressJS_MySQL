@@ -1,0 +1,20 @@
+<h1>Hóa đơn đã xác nhận</h1>
+
+{{#if order}}
+<div class="row mt-4">
+    {{#each order}}
+    <div class="col col-lg-4">
+        <a href="/user/orders/{{this.orderID}}" style="text-decoration: none;color:unset; font-weight: 500">
+            <div class="mt-4 p-4" style="border: 3px solid #058d07; background-color: #3cee0fbf; border-radius: 6px">
+                <p>Mã đơn hàng: {{this.orderID}}</p>
+                <p>Ngày đặt: {{this.create_at}}</p>
+                <p>Trạng thái: {{this.status}}</p>
+                <p>Khách hàng: {{this.full_name}}</p>
+                <p>Số điện thoại: {{this.phone_number}}</p>
+                <p>Tổng tiền: {{this.total}}</p>
+            </div>
+        </a>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
