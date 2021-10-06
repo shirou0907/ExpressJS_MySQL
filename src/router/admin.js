@@ -18,6 +18,7 @@ router.get('/users', adminController.showUsers)
 router.get('/orders-wait', adminController.orderWait) 
 router.post('/orders-wait', adminController.acceptOrder)
 router.get('/orders-success', adminController.orderSuccess) 
+router.get('/orders', adminController.getOrder)
 
 router.get('/', adminController.admin)
 

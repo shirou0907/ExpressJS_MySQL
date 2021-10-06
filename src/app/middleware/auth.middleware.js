@@ -23,16 +23,30 @@ module.exports.requiredAuth = function(req, res, next) {
             }
         })
 
-        order.countOrderWait(user[0].id, function(err,data) {
+        order.countOrderWaitByUser(user[0].id, function(err,data) {
             if(data[0].length != 0) {
                 res.locals.wait = data[0][0];
                 return 
             }
         })
 
-        order.countOrderSuccess(user[0].id, function(err,data) {
+        order.countOrderSuccessByUser(user[0].id, function(err,data) {
             if(data[0].length != 0) {
                 res.locals.success = data[0][0];
+                return 
+            }
+        })
+
+        order.countAllOrderWait(function(err,data) {
+            if(data[0].length != 0) {
+                res.locals.w = data[0].count;
+                return 
+            }
+        })
+
+        order.countAllOrderSuccess(function(err,data) {
+            if(data[0].length != 0) {
+                res.locals.s = data[0].count;
                 return 
             }
         })

@@ -1,4 +1,3 @@
-const { model } = require('mongoose')
 const order = require('../model/order')
 var product = require('../model/product')
 var user = require('../model/user')
@@ -93,6 +92,10 @@ module.exports.deleteUser = function(req, res) {
     user.deleteUser(req.params.id, function(err, data) {
         res.redirect('/admin/users')
     })
+}
+
+module.exports.getOrder = function(req, res) {
+    res.render('admin/orders/index')
 }
 
 module.exports.orderWait = function(req, res) {

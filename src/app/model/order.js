@@ -33,11 +33,19 @@ var order = {
         db.query(`call deleteOrder(${id})`, id, callback)
     },
 
-    countOrderWait: function(id, callback) {
+    countAllOrderWait: function(callback) {
+        db.query('SELECT count(id) AS count FROM orders WHERE status = "WAIT"', callback)
+    },
+
+    countAllOrderSuccess: function(callback) {
+        db.query('SELECT count(id) AS count FROM orders WHERE status = "SUCCESS"', callback)
+    },
+
+    countOrderWaitByUser: function(id, callback) {
         db.query(`call countOrderWait(${id})`, id, callback);
     },
 
-    countOrderSuccess: function(id, callback) {
+    countOrderSuccessByUser: function(id, callback) {
         db.query(`call countOrderSuccess(${id})`, id, callback);
     },
 
