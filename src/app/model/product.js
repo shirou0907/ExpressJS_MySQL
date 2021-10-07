@@ -27,8 +27,11 @@ var product = {
 
     ratingProduct: function(id, callback) {
         return db.query(`call checkRate(${id})`, id, callback);
-    }
+    },
 
+    searchProduct:function(key, callback) {
+        return db.query('select id, name, img_url from products where name like ? limit 6', key+'%', callback);
+    }
 }
 
 module.exports = product;

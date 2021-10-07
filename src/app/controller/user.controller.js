@@ -1,6 +1,7 @@
 var user = require('../model/user');
 var cart = require('../model/cart');
 var order = require('../model/order');
+var product = require('../model/product');
 var md5 = require('md5');
 
 
@@ -132,5 +133,11 @@ module.exports.getOrderItems = function(req, res) {
 module.exports.deleteOrder = function(req, res) {
     order.deleteOrder(req.params.id, function(err, data) {
         res.redirect('/')
+    })
+}
+
+module.exports.postTest = function(req, res) {
+    product.searchProduct(req.body.key, function(err, data) {
+        res.json(data)
     })
 }

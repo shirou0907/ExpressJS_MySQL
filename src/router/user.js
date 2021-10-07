@@ -17,5 +17,7 @@ router.get('/orders-success', userController.getOrderSuccess);
 router.get('/orders/:id', userController.getOrderItems);
 router.post('/orders/:id', userController.deleteOrder);
 router.post('/orders', userController.addOrder);
+
+router.post('/test', userController.postTest);
   
 module.exports = router;
