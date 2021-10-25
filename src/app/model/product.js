@@ -29,8 +29,16 @@ var product = {
         return db.query(`call checkRate(${id})`, id, callback);
     },
 
-    searchProduct:function(key, callback) {
-        return db.query('select id, name, img_url from products where name like ? limit 6', key+'%', callback);
+    searchProduct: function(key, callback) {
+        return db.query('select id, name, img_url from products where name like ? order by price desc limit 6', key+'%', callback);
+    },
+
+    statisticBrand: function(callback) {
+        return db.query('call statisticBrand()', callback);
+    },
+
+    revenue(callback) {
+        return db.query('call revenue()', callback);
     }
 }
 

@@ -2,6 +2,10 @@
     <h3>Thêm mới sản phẩm</h3>
     <hr>
 
+    {{#if error}}
+    <div class="alert alert-danger manager-item" role="alert">{{error}}</div>
+    {{/if}}
+
     <form method="POST" action="">
       <div class="mt-3 h6">
         <label class="form-label">Name</label>

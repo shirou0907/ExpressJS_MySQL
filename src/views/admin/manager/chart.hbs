@@ -1,0 +1,104 @@
+<h1>Quản lý thống kê</h1>
+<hr>
+<div class="container">
+  <div class="row">
+    <h3 class="text-center">Doanh số sản phẩm</h3>
+    <div class="col col-4 p-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Brand</th>
+            <th scope="col">Sell</th>
+          </tr>
+
+        </thead>
+        {{#each data}}
+        <tbody>
+          <tr>
+            <td>{{this.nhasx}}</td>
+            <td>{{this.spbandc}}</td>
+          </tr>
+        </tbody>
+        {{/each}}
+      </table>
+
+    </div>
+    <div class="col col-8">
+      <canvas id="myChart1" class="p-5"></canvas>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center">Doanh thu hàng tháng</h3>
+      <canvas id="myChart2" class="p-5"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  const data = {
+    labels: ['Apple', 'Asus', 'Huawei', 'LG', 'Nokia', 'Oppo', 'Samsung', 'Sony', 'Xiaomi'],
+    datasets: [{
+      label: 'My First Dataset',
+      data: [{{ sell }}],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(205, 15, 16)',
+        'rgb(100, 100, 86)',
+        'rgb(55, 25, 86)',
+        'rgb(25, 205, 6)',
+        'rgb(54, 162, 235)',
+        'rgb(0, 20, 186)',
+        'rgb(255, 5, 36)',
+        'rgb(255, 205, 86)',
+    ],
+    hoverOffset: 6
+  }]
+};
+
+  const config = {
+    type: 'pie',
+    data: data,
+  };
+  const myChart = new Chart(
+    document.getElementById('myChart1'),
+    config,
+  );
+</script>
+
+<script>
+const labels1 = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+  ]
+const data1 = {
+  labels: labels1,
+  datasets: [{
+    label: 'VND',
+    data: [{{revenue}}],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
+};
+const config1 = {
+  type: 'line',
+  data: data1,
+  options: {}
+};
+ const chart = new Chart(
+    document.getElementById('myChart2'),
+    config1,
+  );
+</script>

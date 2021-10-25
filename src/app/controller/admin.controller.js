@@ -39,7 +39,7 @@ module.exports.postProduct = function(req, res, next) {
     }
     product.addProduct(req.body, function(err,data) { 
         if(err) {
-            res.send(err)
+            res.render('admin/products/create', {error: 'Lỗi dữ liệu sản phẩm, vui lòng kiểm tra lại!'})
         }
         else
         res.redirect('/admin/products')
@@ -126,4 +126,21 @@ module.exports.acceptOrder = function(req, res) {
     order.acceptOrder(req.body.orderID, function(err, order) {
         res.redirect('back')
     })
+}
+
+module.exports.manager = function(req, res) {
+    product.revenue(function (err, data) {
+        const {thang1,thang2,thang3,thang4,thang5,thang6,thang7,thang8,thang9,thang10,thang11,thang12} = data[0][0];
+        var revenue = [];
+        revenue.push(thang1, thang2, thang3, thang4, thang5, thang6, thang7, thang8, thang9, thang10, thang11, thang12);
+        
+        res.locals.revenue = revenue;
+    })
+
+    product.statisticBrand(function(err, data) {
+        var brand = data[0].map(e => e.nhasx)
+        var sell = data[0].map(e => e.spbandc)
+        res.render('admin/manager/chart', {brand: brand, sell: sell, data: data[0]})
+    })
+    
 }

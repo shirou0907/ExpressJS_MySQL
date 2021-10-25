@@ -20,6 +20,8 @@ router.post('/orders-wait', adminController.acceptOrder)
 router.get('/orders-success', adminController.orderSuccess) 
 router.get('/orders', adminController.getOrder)
 
+router.get('/manager', adminController.manager)
+
 router.get('/', adminController.admin)
 
 module.exports = router;

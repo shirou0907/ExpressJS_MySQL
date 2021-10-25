@@ -1,52 +1,53 @@
 <div>
-    <h3>Thông tin chi tiết</h3>
-    <hr>
-    <form id="Update" method ="POST" action="/admin/products/{{product.id}}?_method=PUT">
-      <div class="mt-3 h6">
-        <label class="form-label">Name</label>
-        <input name="name" type="text" class="form-control" value="{{product.name}}">
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Image Link</label>
-        <input name="img_url" type="text" class="form-control" value="{{product.img_url}}">
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Brand</label>
-        <select class="form-select" aria-label="Default select example" name="brand">
-          <option selected>{{product.brand}}</option>
-          <option value="Apple">Apple</option>
-          <option value="Asus">Asus</option>
-          <option value="Huawei">Huawei</option>
-          <option value="LG">LG</option>
-          <option value="Nokia">Nokia</option>
-          <option value="Oppo">Oppo</option>
-          <option value="Samsung">Samsung</option>
-          <option value="Sony">Sony</option>
-          <option value="Xiaomi">Xiaomi</option>
+  <h3>Thông tin chi tiết</h3>
+  <hr>
+
+  <form id="Update" method="POST" action="/admin/products/{{product.id}}?_method=PUT">
+    <div class="mt-3 h6">
+      <label class="form-label">Name</label>
+      <input name="name" type="text" class="form-control" value="{{product.name}}">
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Image Link</label>
+      <input name="img_url" type="text" class="form-control" value="{{product.img_url}}">
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Brand</label>
+      <select class="form-select" aria-label="Default select example" name="brand">
+        <option selected>{{product.brand}}</option>
+        <option value="Apple">Apple</option>
+        <option value="Asus">Asus</option>
+        <option value="Huawei">Huawei</option>
+        <option value="LG">LG</option>
+        <option value="Nokia">Nokia</option>
+        <option value="Oppo">Oppo</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Sony">Sony</option>
+        <option value="Xiaomi">Xiaomi</option>
       </select>
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Description</label>
-        <textarea name="description" type="text" class="form-control" rows="8">{{product.description}}</textarea>
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Price</label>
-        <input name="price" type="number" class="form-control" value="{{product.price}}">
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Amount</label>
-        <input name="amount" type="number" class="form-control" value="{{product.amount}}">
-      </div>
-      <div class="mt-3 h6">
-        <label class="form-label">Status</label>
-        <select class="form-select" aria-label="Default select example" name="status">
-          <option selected>{{product.status}}</option>
-          <option value="1">Có hàng</option>
-          <option value="2">Hàng sắp về</option>
-          <option value="3">Liên hệ</option>
-        </select>
-      </div>
-    </form>
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Description</label>
+      <textarea name="description" type="text" class="form-control" rows="8">{{product.description}}</textarea>
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Price</label>
+      <input name="price" type="number" class="form-control" value="{{product.price}}">
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Amount</label>
+      <input name="amount" type="number" class="form-control" value="{{product.amount}}">
+    </div>
+    <div class="mt-3 h6">
+      <label class="form-label">Status</label>
+      <select class="form-select" aria-label="Default select example" name="status">
+        <option selected>{{product.status}}</option>
+        <option value="1">Có hàng</option>
+        <option value="2">Hàng sắp về</option>
+        <option value="3">Liên hệ</option>
+      </select>
+    </div>
+  </form>
 
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
