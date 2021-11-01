@@ -1,0 +1,47 @@
+<h1>Sản phẩm đã xóa</h1>
+<hr>
+    {{#if products}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Create at</th>
+        <th scope="col">Update at</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}} 
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.brand}}</td>
+        <td>{{this.amount}}</td>
+        <td>{{this.create_at}}</td>
+        <td>{{this.update_at}}</td>
+        <td>
+            <form action="/admin/products/recycle/{{this.id}}" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
+                <button type="submit" class="btn btn-success">Restore</button>
+            </form>
+        </td>
+        <td>
+            <form action="/admin/products/recycle/{{this.id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
+                <button type="submit" class="btn btn-danger">Hard Delete</button>
+            </form>
+        </td>
+      </tr>
+      
+      {{/each}}
+    </tbody>
+
+    
+  </table>
+  {{else}}
+    <h3 style="line-height: 500px; text-align: center">Dữ liệu trống!</h3>
+  {{/if}}

@@ -7,6 +7,10 @@ module.exports.admin = function(req, res) {
 }
 
 module.exports.showProducts = function(req, res) {
+    product.countDeleted(function(err,data) {
+        res.locals.deleted = data[0].deleted
+    })
+    
     product.getAllProduct(function(err, products) {
         products.map(e => {
             e.create_at = e.create_at.toLocaleString();
@@ -24,6 +28,22 @@ module.exports.getProduct = function(req, res) {
 
 module.exports.createProduct = function(req, res) {
     res.render('admin/products/create')
+}
+
+module.exports.getRecycle = function(req, res) {
+    product.getAllProductDeleted(function(err, products) {
+        products.map(e => {
+            e.create_at = e.create_at.toLocaleString();
+            e.update_at = e.update_at.toLocaleString();
+        })
+        res.render('admin/products/recycle', {products: products})
+    })
+}
+
+module.exports.restore = function (req, res) {
+    product.restoreProduct(req.body.id, function (err, data) {
+        res.redirect('/admin/products')
+    })
 }
 
 module.exports.postProduct = function(req, res, next) {
@@ -47,6 +67,16 @@ module.exports.postProduct = function(req, res, next) {
 }
 
 module.exports.updateProduct = function(req, res) {
+    var choose = req.body.status
+    if(choose == 1) {
+        req.body.status = 'Có hàng'
+    } 
+    else if(choose == 2) {
+        req.body.status = 'Hàng sắp về'
+    }
+    else {
+        req.body.status = 'Liên hệ'
+    }
     product.updateProduct(req.params.id, req.body, function(err,data) {
         res.redirect('/admin/products')
     })
@@ -54,6 +84,12 @@ module.exports.updateProduct = function(req, res) {
 
 module.exports.deleteProduct = function(req, res) {
     product.deleteProduct(req.params.id, function(err,data) {
+        res.redirect('back')
+    })
+}
+
+module.exports.hardDelete = function(req, res) {
+    product.hardDeleteProduct(req.params.id, function(err) {
         res.redirect('back')
     })
 }
@@ -89,7 +125,7 @@ module.exports.updateUser = function (req, res) {
 }
 
 module.exports.deleteUser = function(req, res) {
-    user.deleteUser(req.params.id, function(err, data) {
+    user.hardDeleteUser(req.params.id, function(err, data) {
         res.redirect('/admin/users')
     })
 }
@@ -133,7 +169,6 @@ module.exports.manager = function(req, res) {
         const {thang1,thang2,thang3,thang4,thang5,thang6,thang7,thang8,thang9,thang10,thang11,thang12} = data[0][0];
         var revenue = [];
         revenue.push(thang1, thang2, thang3, thang4, thang5, thang6, thang7, thang8, thang9, thang10, thang11, thang12);
-        
         res.locals.revenue = revenue;
     })
 

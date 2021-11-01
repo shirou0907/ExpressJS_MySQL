@@ -1,20 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm p-3 mb-5 rounded"
   style="position: fixed; top: 0; left: 0; right: 0; z-index:10">
-  <div class="container-fluid  align-items-baseline">
+  <div class="container-fluid align-items-baseline" style="padding: 0 60px">
     <a class="navbar-brand" href="/">
       <img src="/img/logo.svg" alt="" style="width: 40px;">
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">HOME</a>
+          <a class="nav-link" aria-current="page" href="/"><i class="fas fa-home"></i> HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin">ADMIN</a>
+          <a class="nav-link" href="/admin"><i class="fas fa-user-cog"></i> ADMIN</a>
         </li>
+        {{#unless admin}}
+        {{#if user}}
         <li class="nav-item">
-          <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">CONTACT</a>
+          <a class="nav-link" href="/user/orders-wait" tabindex="-1"><i class="fas fa-shipping-fast"></i> ORDERS</a>
         </li>
+        {{/if}}
+        {{/unless}}
+        {{#unless admin}}
+        <li class="nav-item">
+          <a class="nav-link" href="#" tabindex="-1"><i class="fas fa-phone"></i> CONTACT</a>
+        </li>
+        {{/unless}}
         <li class="nav-item" style="margin-left: 8px; position: relative">
           <form class="d-flex" method="GET" action="/search" autocomplete="off">
             <input name="key" class="search-input form-control me-2" type="text" placeholder="Tìm kiếm... "

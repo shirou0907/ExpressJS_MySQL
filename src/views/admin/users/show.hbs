@@ -28,10 +28,10 @@
         <td>{{this.create_at}}</td>
         <td>{{this.update_at}}</td>
         <td>
-          <a href="/admin/users/{{this.id}}"><button type="button" class="btn btn-secondary">Update</button></a>
+          <a href="/admin/users/{{this.id}}"><button type="button" class="btn btn-primary">Update</button></a>
         </td>
         <td>
-          <a type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{this.id}}">Delete</a></td>
+          <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{this.id}}">Destroy</a></td>
         </td>
       </tr>
       {{/each}}
@@ -50,7 +50,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Bạn có chắc muốn xóa dữ liệu ?</p>
+        <p>Bạn có chắc toàn bộ thông tin liên quan của người dùng này ?</p>
       </div>
       <div class="modal-footer">
         <button id='btn-delete' type="button" class="btn btn-danger">Delete</button>

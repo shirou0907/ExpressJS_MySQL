@@ -2,7 +2,11 @@ var db = require('../config/db');
 
 var product = {
     getAllProduct: function(callback) {
-        return db.query("select * from products", callback);
+        return db.query("select * from products where isDeleted = 0", callback);
+    },
+
+    getAllProductDeleted: function(callback) {
+        return db.query("select * from products where isDeleted = 1", callback);
     },
 
     getProductByID: function(id, callback) {
@@ -22,7 +26,19 @@ var product = {
     },
 
     deleteProduct: function(id, callback) {
-        return db.query("delete from products where id=?", id, callback);
+        return db.query("update products set isDeleted = 1 where id=?", id, callback);
+    },
+
+    hardDeleteProduct: function(id, callback) {
+        return db.query(`call hardDeleteProduct(${id})`, id, callback);
+    },
+
+    countDeleted(callback) {
+        return db.query("select count(id) as deleted from products where isDeleted = 1", callback);
+    },
+
+    restoreProduct: function(id, callback) {
+        return db.query("update products set isDeleted = 0 where id=?", id, callback);
     },
 
     ratingProduct: function(id, callback) {

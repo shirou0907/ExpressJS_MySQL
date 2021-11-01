@@ -1,8 +1,11 @@
 <div class="mt-4">
   <h1>Quản lý danh sách sản phẩm</h1>
 
-  <a type="button" class="btn btn-success float-end" href="/admin/products/create" >
-  + Add
+  <a type="button" class="btn btn-success float-end" style="margin-left: 10px;" href="/admin/products/create" >
+  <i class="fas fa-plus"></i> Add Product
+  </a>
+  <a type="button" class="btn btn-success float-end" href="/admin/products/recycle" >
+  <i class="fas fa-trash-alt"></i> ({{deleted}})
   </a>
 
   <table class="table">
@@ -28,10 +31,10 @@
         <td>{{this.create_at}}</td>
         <td>{{this.update_at}}</td>
         <td>
-          <a href="/admin/products/{{this.id}}"><button type="button" class="btn btn-secondary">Update</button></a>
+          <a href="/admin/products/{{this.id}}"><button type="button" class="btn btn-primary">Update</button></a>
         </td>
         <td>
-          <a type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{this.id}}">Delete</a></td>
+          <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{this.id}}">Delete</a></td>
         </td>
       </tr>
       {{/each}}

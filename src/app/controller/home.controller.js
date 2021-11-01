@@ -64,13 +64,17 @@ module.exports.getID = function(req, res, next ) {
     })
 
     product.ratingProduct(req.params.id, function(err, rate) {
-        res.locals.productRate = rate[0][0]
+        if(rate[0]){
+            res.locals.productRate = rate[0][0]
+        }
+        return
     })
 
     product.getProductByID(req.params.id, function(err, data) {
         data[0].price = Number((data[0].price).toFixed(1)).toLocaleString()
         res.render('products/detail', {product: data[0]})
     })
+
 }
 
 module.exports.postID = function(req, res) {

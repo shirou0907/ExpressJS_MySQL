@@ -13,8 +13,9 @@
       </div>
       <div class="mt-3 h6">
         <label class="form-label">Image Link</label>
-        <input name="img_url" type="text" class="form-control" value="" required>
+        <input name="img_url" type="url" id="img_url" class="form-control" value="" required>
       </div>
+      <h6 id="err" style="color: red">Trường này phải là URL!</h6>
       <div class="mt-3 h6">
         <label class="form-label">Brand</label>
         <select class="form-select" aria-label="Default select example" name="brand" required>
@@ -55,3 +56,29 @@
     </form>
     
 </div>
+
+<script>
+  function isUrlValid(userInput) {
+    var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    if(res == null)
+        return false;
+    else
+        return true;
+  }
+
+  var err = document.getElementById("err")
+  err.style.display = "none";
+  var checkInput = document.getElementById("img_url");
+  checkInput.onchange = function() {
+    if(!isUrlValid(checkInput.value)) {
+    checkInput.value = "";
+      err.style.display = "block";
+    }
+    else {
+      err.style.display = "none";
+    }
+  }
+
+</script>
+
+

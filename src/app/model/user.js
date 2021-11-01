@@ -31,6 +31,10 @@ var user = {
 
     deleteUser: function(id, callback) {
         return db.query("delete from users where id =?", id, callback);
+    },
+
+    hardDeleteUser(id, callback) {
+        return db.query(`call hardDeleteUser(${id})`, id , callback);
     }
 
 }
