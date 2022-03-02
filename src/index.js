@@ -4,6 +4,8 @@ const path = require('path');
 var router = require('./router/app');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
+require('dotenv').config()
+console.log(process.env.USER, process.env.PASSWORD)
 
 var port = 2000;
 var app = express();
